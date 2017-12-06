@@ -1,5 +1,6 @@
 package com.example.carloszamora.carchoice;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,8 +9,7 @@ import android.widget.Button;
 
 import java.io.Console;
 
-public class Inicio extends AppCompatActivity {
-
+public class Inicio extends AppCompatActivity implements View.OnClickListener {
 
     Button btn_comenzar;
 
@@ -17,11 +17,16 @@ public class Inicio extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inicio);
-        Button btn_comenzar = (Button)findViewById(R.id.btn_comenzar);
-
+        btn_comenzar = (Button)findViewById(R.id.btn_comenzar);
+        btn_comenzar.setOnClickListener(this);
     }
 
-    private void comenzar(){
-        Log.e("Inicio","Inicio");
+    @Override
+    public void onClick(View view) {
+
+        if (view == btn_comenzar){
+            Intent i = new Intent(this, Preguntas.class);
+            startActivity(i);
+        }
     }
 }

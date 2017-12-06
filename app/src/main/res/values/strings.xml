@@ -2,5 +2,8 @@
     <string name="app_name">CarChoice</string>
     <string name="title_activity_preguntas">Preguntas</string>
     <string name="action_settings">Settings</string>
-    <string name="str_bienvenido" >Bienvenido, pulsa comenzar para iniciar el analisis</string>
+    <string name="str_bienvenido">Bienvenido, pulsa comenzar para iniciar el analisis</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
