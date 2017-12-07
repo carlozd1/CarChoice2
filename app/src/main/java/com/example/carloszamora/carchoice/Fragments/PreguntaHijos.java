@@ -98,14 +98,21 @@ public class PreguntaHijos extends Fragment {
                 Preguntas.moveViewPager(Global.puntero);
             } else if (rb_si.isChecked()){
                 String respuesta = elemento_respuesta.getText().toString();
+                int hijos = Integer.parseInt(elemento_respuesta.getText().toString());
                 if (respuesta.trim().length() != 0) {
-                    try {
-                        Global.jsonRespuesta.put("hijos",respuesta);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+
+                    if (hijos > 20){
+                        Toast toast = Toast.makeText(getContext(),"Es en serio?",Toast.LENGTH_SHORT);
+                        toast.show();
+                    }else{
+                        try {
+                            Global.jsonRespuesta.put("hijos",respuesta);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        Global.puntero ++;
+                        Preguntas.moveViewPager(Global.puntero);
                     }
-                    Global.puntero ++;
-                    Preguntas.moveViewPager(Global.puntero);
                 }else {
                     Toast toast = Toast.makeText(getContext(),"Debes llenar todos los campos, para poder continuar",Toast.LENGTH_SHORT);
                     toast.show();

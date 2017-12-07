@@ -67,15 +67,21 @@ public class PreguntaPlazas extends Fragment {
         public void onClick(View v) {
 
             String respuesta = edit_respuesta.getText().toString();
+            int plazas = Integer.parseInt(edit_respuesta.getText().toString());
             Log.d("TAAAAG",">>>>>: "+ Global.puntero);
             if (respuesta.trim().length() != 0) {
-                try {
-                    Global.jsonRespuesta.put("plazas",respuesta);
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                if (plazas > 6){
+                    Toast toast = Toast.makeText(getContext(),"Buscas automovil o transporte publico?",Toast.LENGTH_SHORT);
+                    toast.show();
+                }else{
+                    try {
+                        Global.jsonRespuesta.put("plazas",respuesta);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    Global.puntero ++;
+                    Preguntas.moveViewPager(Global.puntero);
                 }
-                Global.puntero ++;
-                Preguntas.moveViewPager(Global.puntero);
             }else {
                 Toast toast = Toast.makeText(getContext(),"Debes llenar todos los campos, para poder continuar",Toast.LENGTH_SHORT);
                 toast.show();

@@ -114,15 +114,29 @@ public class PreguntaTrabajo extends Fragment {
             } else if (rb_si.isChecked()){
                 String respuesta1 = elemento_respuesta.getText().toString();
                 String respuesta2 = elemento_respuesta2.getText().toString();
+                int ingresos = Integer.parseInt(elemento_respuesta.getText().toString());
+                int egresos = Integer.parseInt(elemento_respuesta2.getText().toString());
                 if (respuesta1.trim().length() != 0 && respuesta2.trim().length() != 0) {
-                    try {
-                        Global.jsonRespuesta.put("ingreso",respuesta1);
-                        Global.jsonRespuesta.put("egreso",respuesta2);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+
+                    if (ingresos == 0 || egresos == 0){
+                        Toast toast = Toast.makeText(getContext(),"Intenta con otro valor",Toast.LENGTH_SHORT);
+                        toast.show();
+                    }else if (egresos > ingresos){
+                        Toast toast = Toast.makeText(getContext(),"No puedes gastar mas de lo que ganas!",Toast.LENGTH_SHORT);
+                        toast.show();
+                    }else if (egresos == ingresos){
+                        Toast toast = Toast.makeText(getContext(),"Creo que no tienes dinero",Toast.LENGTH_SHORT);
+                        toast.show();
+                    }else{
+                        try {
+                            Global.jsonRespuesta.put("ingreso",respuesta1);
+                            Global.jsonRespuesta.put("egreso",respuesta2);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        Global.puntero ++;
+                        Preguntas.moveViewPager(Global.puntero);
                     }
-                    Global.puntero ++;
-                    Preguntas.moveViewPager(Global.puntero);
                 }else {
                     Toast toast = Toast.makeText(getContext(),"Debes llenar todos los campos, para poder continuar",Toast.LENGTH_SHORT);
                     toast.show();
