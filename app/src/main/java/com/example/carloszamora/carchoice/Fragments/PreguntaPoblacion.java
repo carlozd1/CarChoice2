@@ -66,19 +66,18 @@ public class PreguntaPoblacion extends Fragment {
         return view;
     }
 
-
     View.OnClickListener avanzar = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             String respuesta = elemento_respuesta.getSelectedItem().toString();
-            Integer movimiento = currentitem + 1;
             if (respuesta.trim().length() != 0) {
                 try {
                     Global.jsonRespuesta.put("poblacion",respuesta);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                Preguntas.moveViewPager(movimiento);
+                Global.puntero ++;
+                Preguntas.moveViewPager(Global.puntero);
             }else {
                 Toast toast = Toast.makeText(getContext(),"Debes llenar todos los campos, para poder continuar",Toast.LENGTH_SHORT);
                 toast.show();
@@ -89,14 +88,12 @@ public class PreguntaPoblacion extends Fragment {
     View.OnClickListener regresar = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Integer movimiento = currentitem - 1;
-            if (currentitem > 0){
-                Preguntas.moveViewPager(movimiento);
+            if (Global.puntero > 0){
+                Global.puntero --;
+                Preguntas.moveViewPager(Global.puntero);
             }
         }
     };
-
-
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {

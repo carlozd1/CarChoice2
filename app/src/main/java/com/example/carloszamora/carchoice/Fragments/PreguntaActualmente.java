@@ -26,7 +26,8 @@ import org.json.JSONObject;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class PreguntaEstudio extends Fragment {
+public class PreguntaActualmente extends Fragment {
+
 
     TextView txt_pregunta;
     Button siguientePag;
@@ -35,29 +36,30 @@ public class PreguntaEstudio extends Fragment {
     CustomViewPager viewPager;
     Spinner elemento_respuesta;
 
-    RadioGroup rg;
+    RadioGroup rg,rg2;
     RadioButton rb_si,rb_no;
+    RadioButton rb_si2,rb_no2;
     LinearLayout layout_continuacion;
     TextView txt_pregunta2;
 
-
-    public PreguntaEstudio() {
+    public PreguntaActualmente() {
         // Required empty public constructor
     }
 
-    public static PreguntaEstudio newInstance() {
-        PreguntaEstudio fragment = new PreguntaEstudio();
+    public static PreguntaActualmente newInstance() {
+        PreguntaActualmente fragment = new PreguntaActualmente();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
     }
 
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_pregunta_estudio, container, false);
+        View view = inflater.inflate(R.layout.fragment_pregunta_actualmente, container, false);
 
         siguientePag = (Button) view.findViewById(R.id.btn_siguiente);
         anteriorPag = (Button) view.findViewById(R.id.btn_anterior);
@@ -70,6 +72,10 @@ public class PreguntaEstudio extends Fragment {
         rb_no = (RadioButton) view.findViewById(R.id.rb_no);
         layout_continuacion = (LinearLayout) view.findViewById(R.id.layout_mostrarP);
         txt_pregunta2 = (TextView) getActivity().findViewById(R.id.txt_preguntaEstudio);
+
+        rg2 = (RadioGroup) view.findViewById(R.id.rg_grupo2);
+        rb_si2 = (RadioButton) view.findViewById(R.id.rb_si2);
+        rb_no2 = (RadioButton) view.findViewById(R.id.rb_no2);
 
 
 
@@ -88,8 +94,6 @@ public class PreguntaEstudio extends Fragment {
         public void onClick(View view) {
             if (rb_si.isChecked()){
                 layout_continuacion.setVisibility(View.VISIBLE);
-                txt_pregunta2 = (TextView) getActivity().findViewById(R.id.txt_preguntaEstudio);
-                txt_pregunta2.setText("Ingresa tu grado de estudios:");
             }
             if (rb_no.isChecked()){
                 layout_continuacion.setVisibility(View.GONE);
@@ -103,7 +107,7 @@ public class PreguntaEstudio extends Fragment {
 
             if (rb_no.isChecked()){
                 try {
-                    Global.jsonRespuesta.put("estudio","no");
+                    Global.jsonRespuesta.put("carroactual","no");
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -113,7 +117,14 @@ public class PreguntaEstudio extends Fragment {
                 String respuesta = elemento_respuesta.getSelectedItem().toString();
                 if (respuesta.trim().length() != 0) {
                     try {
-                        Global.jsonRespuesta.put("estudio",respuesta);
+                        if (rb_si2.isChecked()){
+                            Global.jsonRespuesta.put("mismagama","no");
+                        }
+                        if (rb_no2.isChecked()){
+                            Global.jsonRespuesta.put("mismagama","si");
+                        }
+                        Global.jsonRespuesta.put("carroactual","si");
+                        Global.jsonRespuesta.put("gama",respuesta);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -145,6 +156,5 @@ public class PreguntaEstudio extends Fragment {
             Log.d("TAAAAG","Global: "+glbal);
         }
     }
-
 
 }

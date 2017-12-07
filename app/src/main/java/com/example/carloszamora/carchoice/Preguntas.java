@@ -93,7 +93,7 @@ public class Preguntas extends AppCompatActivity {
                 break;
             case 14:
                 Log.d("TAAAAG","aqui ando en: 3"+page);
-                txt_pregunta.setText("Elege una gama: ");
+                txt_pregunta.setText("Elige una gama: ");
                 break;
             default:
                 Log.d("TAAAAG","aqui ando en: def"+page);

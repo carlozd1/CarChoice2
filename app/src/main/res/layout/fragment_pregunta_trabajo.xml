@@ -1,0 +1,98 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center|bottom"
+    android:weightSum="10"
+    tools:context="com.example.carloszamora.carchoice.Fragments.PreguntaTrabajo">
+
+
+    <RadioGroup
+        android:id="@+id/rg_grupo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RadioButton
+            android:id="@+id/rb_si"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Si"/>
+        <RadioButton
+            android:id="@+id/rb_no"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="No"
+            android:checked="true"/>
+    </RadioGroup>
+
+    <LinearLayout
+        android:id="@+id/layout_mostrarP"
+        android:padding="8dip"
+        android:layout_weight="7"
+        android:weightSum="10"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+
+        <TextView
+            android:gravity="center"
+            android:id="@+id/txt_preguntaTrabajo1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="15dip"
+            android:layout_marginTop="15dip"
+            android:layout_weight="2"
+            android:text="Ingresos"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            android:textAlignment="center" />
+
+        <EditText
+            android:id="@+id/edit_trabajo1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number" />
+        <TextView
+            android:gravity="center"
+            android:id="@+id/txt_preguntaTrabajo2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="15dip"
+            android:layout_marginTop="15dip"
+            android:layout_weight="2"
+            android:text="Egresos"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            android:textAlignment="center" />
+
+        <EditText
+            android:id="@+id/edit_trabajo2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:padding="8dip"
+        android:layout_weight=".3"
+        android:weightSum="10"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/btn_anterior"
+            android:layout_weight="5"
+            android:text="Atras"
+            android:layout_width="0dip"
+            android:layout_height="match_parent" />
+        <Button
+            android:id="@+id/btn_siguiente"
+            android:layout_weight="5"
+            android:text="Siguiente"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+</LinearLayout>

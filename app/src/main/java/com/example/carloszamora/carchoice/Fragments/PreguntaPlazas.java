@@ -23,7 +23,8 @@ import org.json.JSONObject;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class PreguntaEdad extends Fragment {
+public class PreguntaPlazas extends Fragment {
+
     TextView txt_pregunta;
     EditText edit_respuesta;
     Button siguientePag;
@@ -31,12 +32,12 @@ public class PreguntaEdad extends Fragment {
     Integer currentitem;
     CustomViewPager viewPager;
 
-    public PreguntaEdad() {
+    public PreguntaPlazas() {
         // Required empty public constructor
     }
 
-    public static PreguntaEdad newInstance() {
-        PreguntaEdad fragment = new PreguntaEdad();
+    public static PreguntaPlazas newInstance() {
+        PreguntaPlazas fragment = new PreguntaPlazas();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -48,7 +49,7 @@ public class PreguntaEdad extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_pregunta_edad, container, false);
+        View view = inflater.inflate(R.layout.fragment_pregunta_plazas, container, false);
         siguientePag = (Button) view.findViewById(R.id.btn_siguiente);
         anteriorPag = (Button) view.findViewById(R.id.btn_anterior);
         viewPager = (CustomViewPager) getActivity().findViewById(R.id.viewpager);
@@ -66,18 +67,15 @@ public class PreguntaEdad extends Fragment {
         public void onClick(View v) {
 
             String respuesta = edit_respuesta.getText().toString();
-            int edad = Integer.parseInt(edit_respuesta.getText().toString());
-            Log.d("TAAAAG",">>>>>: "+Global.puntero);
+            int plazas = Integer.parseInt(edit_respuesta.getText().toString());
+            Log.d("TAAAAG",">>>>>: "+ Global.puntero);
             if (respuesta.trim().length() != 0) {
-                if (edad > 75){
-                    Toast toast = Toast.makeText(getContext(),"Ya estas muy viejo, intenta con otra edad",Toast.LENGTH_SHORT);
-                    toast.show();
-                }else if(edad < 16){
-                    Toast toast = Toast.makeText(getContext(),"Muy joven, intenta con otra edad",Toast.LENGTH_SHORT);
+                if (plazas > 6){
+                    Toast toast = Toast.makeText(getContext(),"Buscas automovil o transporte publico?",Toast.LENGTH_SHORT);
                     toast.show();
                 }else{
                     try {
-                        Global.jsonRespuesta.put("edad",respuesta);
+                        Global.jsonRespuesta.put("plazas",respuesta);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }

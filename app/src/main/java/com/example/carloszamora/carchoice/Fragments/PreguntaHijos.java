@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -26,27 +27,27 @@ import org.json.JSONObject;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class PreguntaEstudio extends Fragment {
+public class PreguntaHijos extends Fragment {
+
 
     TextView txt_pregunta;
     Button siguientePag;
     Button anteriorPag;
     Integer currentitem;
     CustomViewPager viewPager;
-    Spinner elemento_respuesta;
+    EditText elemento_respuesta;
 
     RadioGroup rg;
     RadioButton rb_si,rb_no;
     LinearLayout layout_continuacion;
     TextView txt_pregunta2;
 
-
-    public PreguntaEstudio() {
+    public PreguntaHijos() {
         // Required empty public constructor
     }
 
-    public static PreguntaEstudio newInstance() {
-        PreguntaEstudio fragment = new PreguntaEstudio();
+    public static PreguntaHijos newInstance() {
+        PreguntaHijos fragment = new PreguntaHijos();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -57,13 +58,13 @@ public class PreguntaEstudio extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_pregunta_estudio, container, false);
+        View view = inflater.inflate(R.layout.fragment_pregunta_hijos, container, false);
 
         siguientePag = (Button) view.findViewById(R.id.btn_siguiente);
         anteriorPag = (Button) view.findViewById(R.id.btn_anterior);
         viewPager = (CustomViewPager) getActivity().findViewById(R.id.viewpager);
         txt_pregunta = (TextView) getActivity().findViewById(R.id.txt_title);
-        elemento_respuesta = (Spinner) view.findViewById(R.id.personal_drop_state);
+        elemento_respuesta = (EditText) view.findViewById(R.id.edit_respuesta);
 
         rg = (RadioGroup) view.findViewById(R.id.rg_grupo);
         rb_si = (RadioButton) view.findViewById(R.id.rb_si);
@@ -83,42 +84,35 @@ public class PreguntaEstudio extends Fragment {
         return view;
     }
 
-    View.OnClickListener cambiarEstado = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            if (rb_si.isChecked()){
-                layout_continuacion.setVisibility(View.VISIBLE);
-                txt_pregunta2 = (TextView) getActivity().findViewById(R.id.txt_preguntaEstudio);
-                txt_pregunta2.setText("Ingresa tu grado de estudios:");
-            }
-            if (rb_no.isChecked()){
-                layout_continuacion.setVisibility(View.GONE);
-            }
-        }
-    };
-
     View.OnClickListener avanzar = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
 
             if (rb_no.isChecked()){
                 try {
-                    Global.jsonRespuesta.put("estudio","no");
+                    Global.jsonRespuesta.put("hijos",0);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
                 Global.puntero ++;
                 Preguntas.moveViewPager(Global.puntero);
             } else if (rb_si.isChecked()){
-                String respuesta = elemento_respuesta.getSelectedItem().toString();
+                String respuesta = elemento_respuesta.getText().toString();
+                int hijos = Integer.parseInt(elemento_respuesta.getText().toString());
                 if (respuesta.trim().length() != 0) {
-                    try {
-                        Global.jsonRespuesta.put("estudio",respuesta);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+
+                    if (hijos > 20){
+                        Toast toast = Toast.makeText(getContext(),"Es en serio?",Toast.LENGTH_SHORT);
+                        toast.show();
+                    }else{
+                        try {
+                            Global.jsonRespuesta.put("hijos",respuesta);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        Global.puntero ++;
+                        Preguntas.moveViewPager(Global.puntero);
                     }
-                    Global.puntero ++;
-                    Preguntas.moveViewPager(Global.puntero);
                 }else {
                     Toast toast = Toast.makeText(getContext(),"Debes llenar todos los campos, para poder continuar",Toast.LENGTH_SHORT);
                     toast.show();
@@ -146,5 +140,18 @@ public class PreguntaEstudio extends Fragment {
         }
     }
 
+    View.OnClickListener cambiarEstado = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            if (rb_si.isChecked()){
+                layout_continuacion.setVisibility(View.VISIBLE);
+                txt_pregunta2 = (TextView) getActivity().findViewById(R.id.txt_preguntaHijos);
+                txt_pregunta2.setText("Cuantos:");
+            }
+            if (rb_no.isChecked()){
+                layout_continuacion.setVisibility(View.GONE);
+            }
+        }
+    };
 
 }
