@@ -5,15 +5,15 @@
     android:orientation="vertical"
     android:gravity="center|bottom"
     android:weightSum="10"
-    tools:context="com.example.carloszamora.carchoice.Fragments.PreguntaEdad">
+    tools:context="com.example.carloszamora.carchoice.Fragments.PreguntaPoblacion">
 
     <!-- TODO: Update blank fragment layout -->
-    <EditText
-        android:id="@+id/edit_respuesta"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <android.support.v7.widget.AppCompatSpinner
+        android:id="@+id/personal_drop_state"
         android:layout_margin="8dip"
-        android:inputType="number" />
+        android:layout_width="match_parent"
+        android:entries="@array/poblacion_op"
+        android:layout_height="wrap_content"/>
 
     <LinearLayout
         android:padding="8dip"

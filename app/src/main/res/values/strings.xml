@@ -11,4 +11,14 @@
         <item>Hombre</item>
         <item>Mujer</item>
     </string-array>
+    <string-array name="poblacion_op">
+        <item>Urbano</item>
+        <item>Rural</item>
+    </string-array>
+    <string-array name="estudio_op">
+        <item>Bachillerato</item>
+        <item>Licenciatura</item>
+        <item>Posgrado</item>
+    </string-array>
+
 </resources>

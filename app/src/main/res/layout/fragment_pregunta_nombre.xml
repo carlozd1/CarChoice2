@@ -10,9 +10,10 @@
     <!-- TODO: Update blank fragment layout -->
     <EditText
         android:id="@+id/edit_respuesta"
-        android:layout_margin="8dip"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_margin="8dip"
+        android:inputType="text" />
 
     <LinearLayout
         android:padding="8dip"

@@ -1,6 +1,7 @@
 package com.example.carloszamora.carchoice.Fragments;
 
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -63,6 +64,8 @@ public class PreguntaNombre extends Fragment {
         siguientePag.setOnClickListener(avanzar);
         anteriorPag.setOnClickListener(regresar);
 
+
+
         //       despues de asignar el inflater a view, haces el return de la variable
         return view;
     }
@@ -76,14 +79,18 @@ public class PreguntaNombre extends Fragment {
             //   si no, lo agregas al json global
             //   la clase global debe ser la de utils
             // ---------------------------------------
+
             String nombre = edit_nombre.getText().toString();
             if (nombre.trim().length() != 0) {
                 try {
                     Global.jsonRespuesta.put("nombre",nombre);
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
                 viewPager.setCurrentItem(currentitem + 1);
+                //getActivity().setCounter(1);
+
             }else {
                 Toast toast = Toast.makeText(getContext(),"Debes llenar todos los campos, para poder continuar",Toast.LENGTH_SHORT);
                 toast.show();
