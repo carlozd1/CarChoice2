@@ -7,6 +7,8 @@ import org.json.JSONObject;
 
 public class Global {
 
+//    public static String URL_D = "https://www.carqueryapi.com/api/0.3/?callback=?&cmd=getTrims&[params]";
+    public static String URL_D = "https://www.carqueryapi.com/api/0.3/?callback=?&cmd=getTrims&doors=2&full_results=0&seats=2&max_cylinders=8&model=corvette&year=2000";
     public static JSONObject jsonRespuesta = new JSONObject();
     public static Integer previa;
     public static Integer siguiente;

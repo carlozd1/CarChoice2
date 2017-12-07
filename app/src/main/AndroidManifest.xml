@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Splash">
+        <activity android:name=".Resultado">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,9 +19,11 @@
         <activity
             android:name=".Preguntas"
             android:label="@string/title_activity_preguntas"
-            android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".Inicio"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Inicio"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Splash"></activity>
     </application>
 
 </manifest>
