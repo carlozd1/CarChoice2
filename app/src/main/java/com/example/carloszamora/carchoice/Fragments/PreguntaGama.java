@@ -74,7 +74,7 @@ public class PreguntaGama extends Fragment {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                
+
             }else {
                 Toast toast = Toast.makeText(getContext(),"Debes llenar todos los campos, para poder continuar",Toast.LENGTH_SHORT);
                 toast.show();

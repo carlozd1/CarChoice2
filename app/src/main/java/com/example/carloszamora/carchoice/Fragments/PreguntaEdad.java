@@ -66,9 +66,9 @@ public class PreguntaEdad extends Fragment {
         public void onClick(View v) {
 
             String respuesta = edit_respuesta.getText().toString();
-            int edad = Integer.parseInt(edit_respuesta.getText().toString());
             Log.d("TAAAAG",">>>>>: "+Global.puntero);
             if (respuesta.trim().length() != 0) {
+                int edad = Integer.parseInt(edit_respuesta.getText().toString());
                 if (edad > 75){
                     Toast toast = Toast.makeText(getContext(),"Ya estas muy viejo, intenta con otra edad",Toast.LENGTH_SHORT);
                     toast.show();
