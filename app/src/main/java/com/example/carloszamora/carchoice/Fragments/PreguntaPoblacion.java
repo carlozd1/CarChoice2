@@ -3,7 +3,6 @@ package com.example.carloszamora.carchoice.Fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.AppCompatSpinner;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +12,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.carloszamora.carchoice.Preguntas;
 import com.example.carloszamora.carchoice.R;
 import com.example.carloszamora.carchoice.Utils.CustomViewPager;
 import com.example.carloszamora.carchoice.Utils.Global;
@@ -67,24 +67,18 @@ public class PreguntaPoblacion extends Fragment {
     }
 
 
-
     View.OnClickListener avanzar = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-
-            // ---------------------------------------
-            //    aqui validas si el campo esta vacio,
-            //   si no, lo agregas al json global
-            //   la clase global debe ser la de utils
-            // ---------------------------------------
             String respuesta = elemento_respuesta.getSelectedItem().toString();
+            Integer movimiento = currentitem + 1;
             if (respuesta.trim().length() != 0) {
                 try {
                     Global.jsonRespuesta.put("poblacion",respuesta);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                viewPager.setCurrentItem(currentitem + 1);
+                Preguntas.moveViewPager(movimiento);
             }else {
                 Toast toast = Toast.makeText(getContext(),"Debes llenar todos los campos, para poder continuar",Toast.LENGTH_SHORT);
                 toast.show();
@@ -95,8 +89,9 @@ public class PreguntaPoblacion extends Fragment {
     View.OnClickListener regresar = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            Integer movimiento = currentitem - 1;
             if (currentitem > 0){
-                viewPager.setCurrentItem(currentitem - 1);
+                Preguntas.moveViewPager(movimiento);
             }
         }
     };
@@ -107,8 +102,6 @@ public class PreguntaPoblacion extends Fragment {
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if(isVisibleToUser) {
-            currentitem = viewPager.getCurrentItem();
-            txt_pregunta.setText("Ingresa la zona donde vives:");
             JSONObject glbal = Global.jsonRespuesta;
             Log.d("TAAAAG","Global: "+glbal);
         }

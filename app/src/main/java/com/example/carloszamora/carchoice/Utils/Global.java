@@ -8,8 +8,7 @@ import org.json.JSONObject;
 public class Global {
 
     public static JSONObject jsonRespuesta = new JSONObject();
-    public static Integer previa;
-    public static Integer siguiente;
+    public static Integer puntero = 0;
     static SharedPreferences preferences;
 
     public static String mPreference = "Preference";

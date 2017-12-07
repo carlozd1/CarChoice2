@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.carloszamora.carchoice.Preguntas;
 import com.example.carloszamora.carchoice.R;
 import com.example.carloszamora.carchoice.Utils.CustomViewPager;
 import com.example.carloszamora.carchoice.Utils.Global;
@@ -52,11 +53,8 @@ public class PreguntaEdad extends Fragment {
         anteriorPag = (Button) view.findViewById(R.id.btn_anterior);
         viewPager = (CustomViewPager) getActivity().findViewById(R.id.viewpager);
 
-        txt_pregunta = (TextView) getActivity().findViewById(R.id.txt_title);
         edit_respuesta = (EditText) view.findViewById(R.id.edit_respuesta);
 
-
-        currentitem = viewPager.getCurrentItem();
         siguientePag.setOnClickListener(avanzar);
         anteriorPag.setOnClickListener(regresar);
 
@@ -66,20 +64,16 @@ public class PreguntaEdad extends Fragment {
     View.OnClickListener avanzar = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-
-            // ---------------------------------------
-            //    aqui validas si el campo esta vacio,
-            //   si no, lo agregas al json global
-            //   la clase global debe ser la de utils
-            // ---------------------------------------
+            Global.puntero ++;
             String respuesta = edit_respuesta.getText().toString();
+            Log.d("TAAAAG",">>>>>: "+Global.puntero);
             if (respuesta.trim().length() != 0) {
                 try {
                     Global.jsonRespuesta.put("edad",respuesta);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                viewPager.setCurrentItem(currentitem + 1);
+                Preguntas.moveViewPager(Global.puntero);
             }else {
                 Toast toast = Toast.makeText(getContext(),"Debes llenar todos los campos, para poder continuar",Toast.LENGTH_SHORT);
                 toast.show();
@@ -90,9 +84,11 @@ public class PreguntaEdad extends Fragment {
     View.OnClickListener regresar = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            txt_pregunta.setText("Ingresa tu nombre:");
-            if (currentitem > 0){
-                viewPager.setCurrentItem(currentitem - 1);
+            if (Global.puntero != 0){
+                Global.puntero --;
+                Preguntas.moveViewPager(Global.puntero);
+            }else{
+                Preguntas.moveViewPager(Global.puntero);
             }
         }
     };
@@ -103,8 +99,6 @@ public class PreguntaEdad extends Fragment {
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if(isVisibleToUser) {
-            currentitem = viewPager.getCurrentItem();
-            txt_pregunta.setText("Ingresa tu edad:");
             JSONObject glbal = Global.jsonRespuesta;
             Log.d("TAAAAG","Global: "+glbal);
         }

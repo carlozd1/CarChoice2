@@ -15,6 +15,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.carloszamora.carchoice.Preguntas;
 import com.example.carloszamora.carchoice.R;
 import com.example.carloszamora.carchoice.Utils.CustomViewPager;
 import com.example.carloszamora.carchoice.Utils.Global;
@@ -98,12 +99,7 @@ public class PreguntaEstudio extends Fragment {
     View.OnClickListener avanzar = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-
-            // ---------------------------------------
-            //    aqui validas si el campo esta vacio,
-            //   si no, lo agregas al json global
-            //   la clase global debe ser la de utils
-            // ---------------------------------------
+            Global.puntero ++;
             if (rb_no.isChecked()){
                 try {
                     Global.jsonRespuesta.put("estudio","no");
@@ -118,7 +114,7 @@ public class PreguntaEstudio extends Fragment {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                    viewPager.setCurrentItem(currentitem + 1);
+                    Preguntas.moveViewPager(Global.puntero);
                 }else {
                     Toast toast = Toast.makeText(getContext(),"Debes llenar todos los campos, para poder continuar",Toast.LENGTH_SHORT);
                     toast.show();
@@ -130,8 +126,10 @@ public class PreguntaEstudio extends Fragment {
     View.OnClickListener regresar = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            Global.puntero --;
+            Integer movimiento = currentitem - 1;
             if (currentitem > 0){
-                viewPager.setCurrentItem(currentitem - 1);
+                Preguntas.moveViewPager(Global.puntero);
             }
         }
     };
@@ -141,8 +139,6 @@ public class PreguntaEstudio extends Fragment {
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if(isVisibleToUser) {
-            currentitem = viewPager.getCurrentItem();
-            txt_pregunta.setText("¿Estudias actualmente?");
             JSONObject glbal = Global.jsonRespuesta;
             Log.d("TAAAAG","Global: "+glbal);
         }

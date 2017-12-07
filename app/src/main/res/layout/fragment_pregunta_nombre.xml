@@ -18,21 +18,13 @@
     <LinearLayout
         android:padding="8dip"
         android:layout_weight=".3"
-        android:weightSum="10"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <Button
-            android:id="@+id/btn_anterior"
-            android:layout_weight="5"
-            android:text="Atras"
-            android:layout_width="0dip"
-            android:layout_height="match_parent" />
-        <Button
             android:id="@+id/btn_siguiente"
-            android:layout_weight="5"
             android:text="Siguiente"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </LinearLayout>
 </LinearLayout>

@@ -3,19 +3,16 @@ package com.example.carloszamora.carchoice.Fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
-import android.support.v7.widget.AppCompatSpinner;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.carloszamora.carchoice.Preguntas;
 import com.example.carloszamora.carchoice.R;
 import com.example.carloszamora.carchoice.Utils.CustomViewPager;
 import com.example.carloszamora.carchoice.Utils.Global;
@@ -63,24 +60,18 @@ public class PreguntaSexo extends Fragment {
         return view;
     }
 
-
     View.OnClickListener avanzar = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-
-            // ---------------------------------------
-            //    aqui validas si el campo esta vacio,
-            //   si no, lo agregas al json global
-            //   la clase global debe ser la de utils
-            // ---------------------------------------
+            Global.puntero ++;
             String respuesta = elemento_respuesta.getSelectedItem().toString();
             if (respuesta.trim().length() != 0) {
                 try {
-                    Global.jsonRespuesta.put("sexo",respuesta);
+                    Global.jsonRespuesta.put("poblacion",respuesta);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                viewPager.setCurrentItem(currentitem + 1);
+                Preguntas.moveViewPager(Global.puntero);
             }else {
                 Toast toast = Toast.makeText(getContext(),"Debes llenar todos los campos, para poder continuar",Toast.LENGTH_SHORT);
                 toast.show();
@@ -91,21 +82,17 @@ public class PreguntaSexo extends Fragment {
     View.OnClickListener regresar = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            txt_pregunta.setText("Ingresa tu edad:");
-            if (currentitem > 0){
-                viewPager.setCurrentItem(currentitem - 1);
+            Global.puntero --;
+            if (Global.puntero > 0){
+                Preguntas.moveViewPager(Global.puntero);
             }
         }
     };
-
-
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if(isVisibleToUser) {
-            currentitem = viewPager.getCurrentItem();
-            txt_pregunta.setText("Ingresa tu sexo:");
             JSONObject glbal = Global.jsonRespuesta;
             Log.d("TAAAAG","Global: "+glbal);
         }
