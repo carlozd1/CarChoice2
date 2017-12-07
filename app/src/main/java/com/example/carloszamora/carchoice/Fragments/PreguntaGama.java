@@ -78,7 +78,6 @@ public class PreguntaGama extends Fragment {
                 }
                 Intent resultados = new Intent(getContext(), Resultado.class);
                 startActivity(resultados);
-                
             }else {
                 Toast toast = Toast.makeText(getContext(),"Debes llenar todos los campos, para poder continuar",Toast.LENGTH_SHORT);
                 toast.show();
