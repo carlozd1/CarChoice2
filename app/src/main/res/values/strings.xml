@@ -30,18 +30,19 @@
         <item>Grande</item>
     </string-array>
     <string-array name="motor_op">
-        <item>4 Cil</item>
-        <item>6 Cil</item>
-        <item>8 Cil</item>
-        <item>10 Cil</item>
-        <item>12 Cil</item>
+        <item>4</item>
+        <item>6</item>
+        <item>8</item>
+        <item>10</item>
+        <item>12</item>
     </string-array>
     <string-array name="gama_op">
-        <item>g1</item>
-        <item>6 Cil</item>
-        <item>8 Cil</item>
-        <item>10 Cil</item>
-        <item>12 Cil</item>
+        <item>Coupe</item>
+        <item>Sedan</item>
+        <item>SUV</item>
+        <item>Pickup</item>
+        <item>Crossover</item>
+        <item>Minivan</item>
     </string-array>
 
 </resources>
