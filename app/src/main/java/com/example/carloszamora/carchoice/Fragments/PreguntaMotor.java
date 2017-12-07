@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,38 +23,39 @@ import org.json.JSONObject;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class PreguntaEdad extends Fragment {
+public class PreguntaMotor extends Fragment {
+
     TextView txt_pregunta;
-    EditText edit_respuesta;
+    Spinner elemento_respuesta;
     Button siguientePag;
     Button anteriorPag;
     Integer currentitem;
     CustomViewPager viewPager;
 
-    public PreguntaEdad() {
+    public PreguntaMotor() {
         // Required empty public constructor
     }
 
-    public static PreguntaEdad newInstance() {
-        PreguntaEdad fragment = new PreguntaEdad();
+
+    public static PreguntaMotor newInstance() {
+        PreguntaMotor fragment = new PreguntaMotor();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
     }
 
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_pregunta_edad, container, false);
+        View view = inflater.inflate(R.layout.fragment_pregunta_motor, container, false);
+
         siguientePag = (Button) view.findViewById(R.id.btn_siguiente);
         anteriorPag = (Button) view.findViewById(R.id.btn_anterior);
         viewPager = (CustomViewPager) getActivity().findViewById(R.id.viewpager);
+        txt_pregunta = (TextView) getActivity().findViewById(R.id.txt_title);
+        elemento_respuesta = (Spinner) view.findViewById(R.id.personal_drop_state);
 
-        edit_respuesta = (EditText) view.findViewById(R.id.edit_respuesta);
-
+        currentitem = viewPager.getCurrentItem();
         siguientePag.setOnClickListener(avanzar);
         anteriorPag.setOnClickListener(regresar);
 
@@ -65,11 +66,10 @@ public class PreguntaEdad extends Fragment {
         @Override
         public void onClick(View v) {
 
-            String respuesta = edit_respuesta.getText().toString();
-            Log.d("TAAAAG",">>>>>: "+Global.puntero);
+            String respuesta = elemento_respuesta.getSelectedItem().toString();
             if (respuesta.trim().length() != 0) {
                 try {
-                    Global.jsonRespuesta.put("edad",respuesta);
+                    Global.jsonRespuesta.put("motor",respuesta);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -85,24 +85,19 @@ public class PreguntaEdad extends Fragment {
     View.OnClickListener regresar = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            if (Global.puntero != 0){
+            if (Global.puntero > 0){
                 Global.puntero --;
-                Preguntas.moveViewPager(Global.puntero);
-            }else{
                 Preguntas.moveViewPager(Global.puntero);
             }
         }
     };
 
-
-
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        if(isVisibleToUser) {
+        if (isVisibleToUser) {
             JSONObject glbal = Global.jsonRespuesta;
-            Log.d("TAAAAG","Global: "+glbal);
+            Log.d("TAAAAG", "Global: " + glbal);
         }
     }
-
 }

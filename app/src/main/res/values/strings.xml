@@ -20,5 +20,28 @@
         <item>Licenciatura</item>
         <item>Posgrado</item>
     </string-array>
+    <string-array name="civil_op">
+        <item>Soltero</item>
+        <item>Casado</item>
+    </string-array>
+    <string-array name="mascota_op">
+        <item>Chico</item>
+        <item>Mediano</item>
+        <item>Grande</item>
+    </string-array>
+    <string-array name="motor_op">
+        <item>4 Cil</item>
+        <item>6 Cil</item>
+        <item>8 Cil</item>
+        <item>10 Cil</item>
+        <item>12 Cil</item>
+    </string-array>
+    <string-array name="gama_op">
+        <item>g1</item>
+        <item>6 Cil</item>
+        <item>8 Cil</item>
+        <item>10 Cil</item>
+        <item>12 Cil</item>
+    </string-array>
 
 </resources>

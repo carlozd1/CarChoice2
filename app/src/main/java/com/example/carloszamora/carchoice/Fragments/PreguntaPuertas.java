@@ -23,7 +23,8 @@ import org.json.JSONObject;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class PreguntaEdad extends Fragment {
+public class PreguntaPuertas extends Fragment {
+
     TextView txt_pregunta;
     EditText edit_respuesta;
     Button siguientePag;
@@ -31,24 +32,22 @@ public class PreguntaEdad extends Fragment {
     Integer currentitem;
     CustomViewPager viewPager;
 
-    public PreguntaEdad() {
+    public PreguntaPuertas() {
         // Required empty public constructor
     }
 
-    public static PreguntaEdad newInstance() {
-        PreguntaEdad fragment = new PreguntaEdad();
+    public static PreguntaPuertas newInstance() {
+        PreguntaPuertas fragment = new PreguntaPuertas();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
     }
 
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_pregunta_edad, container, false);
+        View view = inflater.inflate(R.layout.fragment_pregunta_puertas, container, false);
         siguientePag = (Button) view.findViewById(R.id.btn_siguiente);
         anteriorPag = (Button) view.findViewById(R.id.btn_anterior);
         viewPager = (CustomViewPager) getActivity().findViewById(R.id.viewpager);
@@ -66,10 +65,10 @@ public class PreguntaEdad extends Fragment {
         public void onClick(View v) {
 
             String respuesta = edit_respuesta.getText().toString();
-            Log.d("TAAAAG",">>>>>: "+Global.puntero);
+            Log.d("TAAAAG",">>>>>: "+ Global.puntero);
             if (respuesta.trim().length() != 0) {
                 try {
-                    Global.jsonRespuesta.put("edad",respuesta);
+                    Global.jsonRespuesta.put("puertas",respuesta);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
