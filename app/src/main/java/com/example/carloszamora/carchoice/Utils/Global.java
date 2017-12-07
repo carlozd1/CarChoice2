@@ -7,10 +7,18 @@ import org.json.JSONObject;
 
 public class Global {
 
-//    public static String URL_D = "https://www.carqueryapi.com/api/0.3/?callback=?&cmd=getTrims&[params]";
-    public static String URL_D = "https://www.carqueryapi.com/api/0.3/?callback=?&cmd=getTrims&doors=2&full_results=0&seats=2&max_cylinders=8&model=corvette&year=2000";
+    public static String URL_D = "https://www.carqueryapi.com/api/0.3/?callback=?&cmd=getTrims";
+//    public static String URL_D = "https://www.carqueryapi.com/api/0.3/?callback=?&cmd=getTrims&doors=2&full_results=1&seats=2&max_cylinders=8&year=2000";
     public static JSONObject jsonRespuesta = new JSONObject();
     public static Integer puntero = 0;
+    public static String param1 = "&doors=";
+    public static String param2 = "&full_results=1";
+    public static String param3 = "&seats=";
+    public static String param4 = "&max_cylinders=";
+    public static String param5 = "&min_year=2010";
+    public static String param6 = "&body=";
+
+
     static SharedPreferences preferences;
 
     public static String mPreference = "Preference";
