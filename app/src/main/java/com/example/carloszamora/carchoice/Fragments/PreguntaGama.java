@@ -1,6 +1,7 @@
 package com.example.carloszamora.carchoice.Fragments;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.carloszamora.carchoice.Preguntas;
 import com.example.carloszamora.carchoice.R;
+import com.example.carloszamora.carchoice.Resultado;
 import com.example.carloszamora.carchoice.Utils.CustomViewPager;
 import com.example.carloszamora.carchoice.Utils.Global;
 
@@ -74,6 +76,8 @@ public class PreguntaGama extends Fragment {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+                Intent resultados = new Intent(getContext(), Resultado.class);
+                startActivity(resultados);
                 
             }else {
                 Toast toast = Toast.makeText(getContext(),"Debes llenar todos los campos, para poder continuar",Toast.LENGTH_SHORT);

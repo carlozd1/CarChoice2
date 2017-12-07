@@ -61,10 +61,10 @@ public class Resultado extends AppCompatActivity {
         String param5 = Global.param5;
         String param6 = Global.param6+body;
         optionsArray = new ArrayList<>();
-        URL = ""+param1+param2+param3+param4+param5+param6;
+        URL = Global.URL_D+param1+param2+param3+param4+param5+param6;
         loader = (AVLoadingIndicatorView)findViewById(R.id.avi_loader);
 
-        new RestApiClient(URL ,null, null, null, RestApiClient.METHOD.GET, new RestApiClient.RestInterface() {
+        new RestApiClient(URL ,"", "", "", RestApiClient.METHOD.GET, new RestApiClient.RestInterface() {
 
             @Override
             public void onFinish(final String Result) {
@@ -76,21 +76,25 @@ public class Resultado extends AppCompatActivity {
                         JSONObject jsonResult = new JSONObject(resultado);
                         JSONArray propuestas = new JSONArray(jsonResult.getString("Trims"));
                         Integer size = propuestas.length();
-                        for (int i = 0; i < size; i++) {
-                            jsonElement = new JSONObject(propuestas.getString(i));
-                            String marca = jsonElement.getString("make_display");
-                            String gama = jsonElement.getString("model_body");
-                            String modelo = jsonElement.getString("model_name");
-                            String motor = jsonElement.getString("model_engine_cyl");
-                            String plazas = jsonElement.getString("model_seats");
-                            String puertas = jsonElement.getString("model_doors");
-                            optionsArray.add(new Propuesta(modelo,marca,puertas,plazas,motor,gama));
+                        if(size==0){
+                            Toast toast = Toast.makeText(getApplicationContext(),"Ups, lo siento, "+usuario+" creo que no encontre ninguna opcion para ti! :(",Toast.LENGTH_SHORT);
+                            toast.show();
+                        }else{
+                            for (int i = 0; i < size; i++) {
+                                jsonElement = new JSONObject(propuestas.getString(i));
+                                String marca = jsonElement.getString("make_display");
+                                String gama = jsonElement.getString("model_body");
+                                String modelo = jsonElement.getString("model_name");
+                                String motor = jsonElement.getString("model_engine_cyl");
+                                String plazas = jsonElement.getString("model_seats");
+                                String puertas = jsonElement.getString("model_doors");
+                                optionsArray.add(new Propuesta(modelo,marca,puertas,plazas,motor,gama));
+                            }
+                            RecyclerView principalRecycler = (RecyclerView)findViewById(R.id.recycler_propuestas);
+                            principalRecycler.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                            ResultadosAdapter resultadosAdapter = new ResultadosAdapter(getApplicationContext(), optionsArray);
+                            principalRecycler.setAdapter(resultadosAdapter);
                         }
-                        RecyclerView principalRecycler = (RecyclerView)findViewById(R.id.recycler_propuestas);
-                        principalRecycler.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                        ResultadosAdapter resultadosAdapter = new ResultadosAdapter(getApplicationContext(), optionsArray);
-                        principalRecycler.setAdapter(resultadosAdapter);
-
                     } catch (JSONException e) {
                         e.printStackTrace();
                         Toast toast = Toast.makeText(getApplicationContext(),"Ups, lo siento, "+usuario+" creo que no encontre ninguna opcion para ti! :(",Toast.LENGTH_SHORT);
